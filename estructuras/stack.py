@@ -12,26 +12,49 @@ Sugerencia:
 
 class Node:
     # TODO: implementar nodo simple
-    pass
+    def __init__(self, value):
+        self.value = value
+        self.next = None
 
 class Stack:
-    # TODO: implementar pila enlazada
+    def __init__(self):
+        self.head = None
+        self.size = 0
+
     def push(self, value):
         """Inserta en el tope. O(1)"""
-        raise NotImplementedError
+        new_node = Node(value)
+        if self.head:
+            new_node.next = self.head
+        self.head = new_node
+        self.size += 1
 
     def pop(self):
         """Extrae y retorna el tope. O(1). Debe lanzar IndexError si está vacía."""
-        raise NotImplementedError
+        if self.head:
+            top = self.head
+            self.head = self.head.next
+            self.size -= 1
+            return top.value
+        else:
+            raise IndexError
 
     def peek(self):
         """Retorna el tope sin extraer. O(1). IndexError si vacía."""
-        raise NotImplementedError
+        if self.head:
+            top = self.head
+            return top.value
+        else:
+            raise IndexError
 
     def is_empty(self):
         """True si no hay elementos. O(1)"""
-        raise NotImplementedError
+        if self.size == 0:
+            return True
+        else:
+            return False
+        
 
     def size(self):
         """Cantidad de elementos. O(1)"""
-        raise NotImplementedError
+        return self.size
