@@ -23,3 +23,14 @@ python -m unittest -v
 * Agrega más casos (bordes, errores esperados).
 * Documenta complejidades Big-O en los READMEs de cada carpeta.
 
+## Evidencia Prueba test_linkedlist.py
+
+![alt text](image.png)
+
+## Evidencia Prueba test_queue.py
+
+![alt text](image-1.png)
+
+## Evidencia Prueba test_stack.py
+
+![alt text](image-2.png)
