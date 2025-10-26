@@ -14,14 +14,33 @@ from estructuras.linkedlist import DoublyLinkedList
 
 _lista_tareas = DoublyLinkedList()
 
+class Task:
+    def __init__(self, task_id, descripcion, prioridad):
+        self.id = task_id
+        self.description = descripcion
+        self.priority = prioridad
+
 def add_task(task_id: int, descripcion: str, prioridad: int) -> None:
-    # TODO: crear dict y agregar al final (append) en O(1)
-    raise NotImplementedError
+    nueva_tarea = Task(task_id, descripcion, prioridad)
+    _lista_tareas.append(nueva_tarea)
 
 def find_by_id(task_id: int):
-    # TODO: delegar en DLL.find_by_id (O(n))
-    raise NotImplementedError
+    tarea = _lista_tareas.find_by_id(task_id)
+    if tarea is None:
+        return None
+    return {
+        "id": tarea.id,
+        "descripcion": tarea.description,
+        "prioridad": tarea.priority
+    }
 
 def find_by_priority(prioridad: int):
-    # TODO: delegar en DLL.find_by_prioridad (O(n))
-    raise NotImplementedError
+    tareas = _lista_tareas.find_by_prioridad(prioridad)
+    resultado = []
+    for tarea in tareas:
+        resultado.append({
+            "id": tarea.id,
+            "descripcion": tarea.description,
+            "prioridad": tarea.priority
+        })
+    return resultado
