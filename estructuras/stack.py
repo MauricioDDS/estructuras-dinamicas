@@ -19,7 +19,7 @@ class Node:
 class Stack:
     def __init__(self):
         self.head = None
-        self.size = 0
+        self._size = 0
 
     def push(self, value):
         """Inserta en el tope. O(1)"""
@@ -27,14 +27,14 @@ class Stack:
         if self.head:
             new_node.next = self.head
         self.head = new_node
-        self.size += 1
+        self._size += 1
 
     def pop(self):
         """Extrae y retorna el tope. O(1). Debe lanzar IndexError si está vacía."""
         if self.head:
             top = self.head
             self.head = self.head.next
-            self.size -= 1
+            self._size -= 1
             return top.value
         else:
             raise IndexError
@@ -49,7 +49,7 @@ class Stack:
 
     def is_empty(self):
         """True si no hay elementos. O(1)"""
-        if self.size == 0:
+        if self._size == 0:
             return True
         else:
             return False
@@ -57,4 +57,4 @@ class Stack:
 
     def size(self):
         """Cantidad de elementos. O(1)"""
-        return self.size
+        return self._size

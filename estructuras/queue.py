@@ -19,7 +19,7 @@ class DoubleNode:
 
 class Queue:
     def __init__(self):
-        self.size = 0
+        self._size = 0
         self.front = None
         self.rear = None
         
@@ -28,30 +28,36 @@ class Queue:
         """Inserta al final. O(1)"""
         new_node = DoubleNode(value)
         if self.rear is None:
-            self.front = self.rear = self.value
-            self.size += 1
-            return
-        self.rear.next = new_node
-        new_node.prev = self.rear
-        self.rear = new_node
-        self.size += 1
+            self.front = self.rear = new_node
+        else:
+            self.rear.next = new_node
+            new_node.prev = self.rear
+            self.rear = new_node
+        self._size += 1
             
-
     def dequeue(self):
         """Extrae el primero. O(1). Debe lanzar IndexError si está vacía."""
-        if self.head:
-            temp = self.head
+        if self._size == 0:
+            raise IndexError("Cola Vacia")
+        temp = self.front.value
+        self.front = self.front.next
+        if self.front is not None:
+            self.front.prev = None
         else:
-            raise IndexError
-
+            self.rear = None
+        self._size -= 1
+        return temp
+        
     def peek(self):
         """Retorna el primero sin extraer. O(1). IndexError si vacía."""
-        raise NotImplementedError
+        if self._size == 0:
+            raise IndexError("Cola Vacia")
+        return self.front.value
 
     def is_empty(self):
         """True si la cola está vacía. O(1)"""
-        raise NotImplementedError
+        return self._size == 0
 
     def size(self):
         """Cantidad de elementos. O(1)"""
-        raise NotImplementedError
+        return self._size
