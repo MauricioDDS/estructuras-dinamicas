@@ -18,6 +18,14 @@ from estructuras.stack import Stack
 PARES = {')': '(', '}': '{', ']': '['}
 
 def validate_expression(expression: str) -> bool:
-    # TODO: Implementar con Stack siguiendo las reglas de arriba.
-    # Debe ser O(n) en tiempo; O(n) espacio peor caso.
-    raise NotImplementedError
+    stack = Stack()
+    for current in expression:
+        if current in "([{":
+            stack.push(current)
+        elif current in ")]}":
+            if stack.is_empty():
+                return False
+            top = stack.pop()
+            if PARES[current] != top:
+                return False
+    return stack.is_empty()
