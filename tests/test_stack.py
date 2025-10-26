@@ -10,11 +10,37 @@ class TestChallenge1Stack(unittest.TestCase):
         # Assert
         self.assertTrue(resultado)
 
-    # TODO: agrega más casos:
-    # - desbalance por cierre extra
-    # - orden incorrecto "{[}]"
-    # - cadena vacía -> True
-    # - solo aperturas -> False
+    def test_simple_unbalanced_expression(self):
+        # Arrange
+        expresion = "({[]}))"
+        # Act
+        resultado = validate_expression(expresion)
+        # Assert
+        self.assertFalse(resultado)
+
+    def test_simple_incorrect_order_expression(self):
+        # Arrange
+        expresion = "{[}]"
+        # Act
+        resultado = validate_expression(expresion)
+        # Assert
+        self.assertFalse(resultado)
+
+    def test_empty_expression(self):
+        # Arrange
+        expresion = ""
+        # Act
+        resultado = validate_expression(expresion)
+        # Assert
+        self.assertTrue(resultado)
+
+    def test_only_opening_characters(self):
+        # Arrange
+        expresion = "([{"
+        # Act
+        resultado = validate_expression(expresion)
+        # Assert
+        self.assertFalse(resultado)
 
 if __name__ == "__main__":
     unittest.main()
